@@ -10,7 +10,7 @@ namespace IATK
     /// <summary>
     /// View class
     /// </summary>
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class View : MonoBehaviour 
     {
         // EVENTS  

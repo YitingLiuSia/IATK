@@ -12,7 +12,7 @@ namespace IATK
     /// <summary>
     /// Visualisation class to act as a view controller - reads the model to create the view
     /// </summary>
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class Visualisation : MonoBehaviour
     {
        

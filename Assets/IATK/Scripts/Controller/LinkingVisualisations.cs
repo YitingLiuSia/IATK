@@ -5,7 +5,7 @@ using IATK;
 using System.Linq;
 namespace IATK
 {
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class LinkingVisualisations : MonoBehaviour
     {
 

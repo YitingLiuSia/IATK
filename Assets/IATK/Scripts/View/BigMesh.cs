@@ -14,7 +14,7 @@ namespace IATK
     /// <summary>
     /// Big mesh class. Feed it as many vertices as you want and it will aggregate the meshes to fit Unity's mesh index limit.
     /// </summary>
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class BigMesh : MonoBehaviour
     {
         // CLASSES

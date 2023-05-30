@@ -10,7 +10,7 @@ namespace IATK
     /// <summary>
     /// VR Visualisation class to act as a view controller - reads the model to create the view
     /// </summary>
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class VRVisualisation : Visualisation
     {
         private const bool enableVisualisationScaling = false; // Disabled until scaling bug is fixed in Tilia: shorturl.at/ayFP3
