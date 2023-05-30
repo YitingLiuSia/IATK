@@ -6,7 +6,7 @@ using System;
 namespace IATK
 {
     [ExecuteAlways]
-    public class ScatterplotVisualisation : AbstractVisualisation 
+    public class ScatterplotVisualisation : AbstractVisualisation
     {
 
         public override void CreateVisualisation()
@@ -122,7 +122,8 @@ namespace IATK
             name = savedName;
         }
 
-        public override void UpdateVisualisation(PropertyType propertyType){
+        public override void UpdateVisualisation(PropertyType propertyType)
+        {
 
             if (viewList.Count == 0)
                 CreateVisualisation();
@@ -141,7 +142,7 @@ namespace IATK
                             viewList[0].UpdateXPositions(visualisationReference.dataSource[visualisationReference.xDimension.Attribute].Data);
                             viewList[0].TweenPosition();
                         }
-                        if(creationConfiguration != null)
+                        if (creationConfiguration != null)
                         {
                             if (creationConfiguration.Axies.ContainsKey(CreationConfiguration.Axis.X))
                             {
@@ -164,7 +165,7 @@ namespace IATK
                             viewList[0].UpdateYPositions(visualisationReference.dataSource[visualisationReference.yDimension.Attribute].Data);
                             viewList[0].TweenPosition();
                         }
-                        if(creationConfiguration != null)
+                        if (creationConfiguration != null)
                         {
                             if (creationConfiguration.Axies.ContainsKey(CreationConfiguration.Axis.Y))
                             {
@@ -187,7 +188,7 @@ namespace IATK
                             viewList[0].UpdateZPositions(visualisationReference.dataSource[visualisationReference.zDimension.Attribute].Data);
                             viewList[0].TweenPosition();
                         }
-                        if(creationConfiguration != null)
+                        if (creationConfiguration != null)
                         {
                             if (creationConfiguration.Axies.ContainsKey(CreationConfiguration.Axis.Z))
                             {
@@ -226,7 +227,7 @@ namespace IATK
 
                         }
 
-                        if(creationConfiguration != null)
+                        if (creationConfiguration != null)
                         {
                             creationConfiguration.ColourDimension = visualisationReference.colourDimension;
                             creationConfiguration.colourKeys = visualisationReference.dimensionColour;
@@ -247,9 +248,9 @@ namespace IATK
                                     viewList[i].SetSizeChannel(new float[visualisationReference.dataSource.DataCount]);
                                 }
                             }
-                            if(creationConfiguration != null)
+                            if (creationConfiguration != null)
                             {
-                                creationConfiguration.SizeDimension = visualisationReference.sizeDimension;       
+                                creationConfiguration.SizeDimension = visualisationReference.sizeDimension;
                             }
                             viewList[0].TweenSize();
 
@@ -263,7 +264,7 @@ namespace IATK
                             viewList[i].SetMinSize(visualisationReference.minSize);        // Data is normalised
                             viewList[i].SetMaxSize(visualisationReference.maxSize);
                         }
-                        if(creationConfiguration != null)
+                        if (creationConfiguration != null)
                         {
                             creationConfiguration.Size = visualisationReference.size;
                             creationConfiguration.MinSize = visualisationReference.minSize;
@@ -272,17 +273,17 @@ namespace IATK
 
                         break;
                     case AbstractVisualisation.PropertyType.LinkingDimension:
-                        if(creationConfiguration != null)
+                        if (creationConfiguration != null)
                         {
                             creationConfiguration.LinkingDimension = visualisationReference.linkingDimension;
                         }
-                        
+
                         CreateVisualisation(); // needs to recreate the visualsiation because the mesh properties have changed
                         rescaleViews();
                         break;
 
                     case AbstractVisualisation.PropertyType.GeometryType:
-                        if(creationConfiguration != null)
+                        if (creationConfiguration != null)
                         {
                             creationConfiguration.Geometry = visualisationReference.geometry;
                         }
@@ -291,7 +292,7 @@ namespace IATK
                         break;
 
                     case AbstractVisualisation.PropertyType.Scaling:
-                        
+
                         for (int i = 0; i < viewList.Count; i++)
                         {
                             viewList[i].SetMinNormX(visualisationReference.xDimension.minScale);
@@ -301,8 +302,8 @@ namespace IATK
                             viewList[i].SetMinNormZ(visualisationReference.zDimension.minScale);
                             viewList[i].SetMaxNormZ(visualisationReference.zDimension.maxScale);
                         }
-                        
-                        if(creationConfiguration != null)
+
+                        if (creationConfiguration != null)
                         {
                             // TODO: Move visualsiation size from Scaling to its own PropertyType
                             creationConfiguration.VisualisationWidth = visualisationReference.width;
@@ -323,7 +324,7 @@ namespace IATK
                         }
                         break;
                     case AbstractVisualisation.PropertyType.AttributeFiltering:
-                        if (visualisationReference.attributeFilters!=null)
+                        if (visualisationReference.attributeFilters != null)
                         {
                             foreach (var viewElement in viewList)
                             {
@@ -352,7 +353,7 @@ namespace IATK
                             }
                         }
                         break;
-                    case PropertyType.VisualisationType:                       
+                    case PropertyType.VisualisationType:
                         break;
                     case PropertyType.BlendDestinationMode:
                         float bmds = (int)(System.Enum.Parse(typeof(UnityEngine.Rendering.BlendMode), visualisationReference.blendingModeDestination));
@@ -361,7 +362,7 @@ namespace IATK
                             viewList[i].SetBlendindDestinationMode(bmds);
                         }
 
-                            break;
+                        break;
                     case PropertyType.BlendSourceMode:
                         float bmd = (int)(System.Enum.Parse(typeof(UnityEngine.Rendering.BlendMode), visualisationReference.blendingModeSource));
                         for (int i = 0; i < viewList.Count; i++)
@@ -373,13 +374,13 @@ namespace IATK
                     default:
                         break;
                 }
-            
+
             if (visualisationReference.geometry != GeometryType.Undefined)// || visualisationType == VisualisationTypes.PARALLEL_COORDINATES)
-            
-            if(creationConfiguration != null)
-            {
-                SerializeViewConfiguration(creationConfiguration);
-            }
+
+                if (creationConfiguration != null)
+                {
+                    SerializeViewConfiguration(creationConfiguration);
+                }
 
             //Update any label on the corresponding axes
             UpdateVisualisationAxes(propertyType);
@@ -404,8 +405,8 @@ namespace IATK
                     {
                         Vector3 pos = Vector3.zero;
                         pos.y = -0.025f;
-                        X_AXIS = CreateAxis(propertyType, visualisationReference.xDimension, pos, new Vector3(0f, 0f, 0f), 0);   
-                        
+                        X_AXIS = CreateAxis(propertyType, visualisationReference.xDimension, pos, new Vector3(0f, 0f, 0f), 0);
+
                     }
                     break;
                 case AbstractVisualisation.PropertyType.Y:
@@ -479,14 +480,14 @@ namespace IATK
                         BindMinMaxAxisValues(axis, visualisationReference.zDimension);
                         axis.UpdateLength(visualisationReference.depth);
                     }
-                    
+
                     rescaleViews();
                     break;
                 default:
                     break;
             }
         }
-        
+
         /// <summary>
         /// Gets the axies.
         /// </summary>
@@ -502,7 +503,7 @@ namespace IATK
 
             return retVal;
         }
-        
+
         /// <summary>
         /// Rescales the views in this scatterplot to the width, height, and depth values in the visualisationReference
         /// </summary>
@@ -518,10 +519,10 @@ namespace IATK
             }
         }
 
-        public override void SaveConfiguration(){}
+        public override void SaveConfiguration() { }
 
-        public override void LoadConfiguration(){}
-        
+        public override void LoadConfiguration() { }
+
         /// <summary>
         /// Maps the colours.
         /// </summary>
@@ -557,7 +558,7 @@ namespace IATK
         // ******************************
         // SPECIFIC VISUALISATION METHODS
         // ******************************
-        
+
         private View CreateSimpleVisualisation(CreationConfiguration configuration)
         {
 

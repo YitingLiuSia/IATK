@@ -234,6 +234,8 @@ namespace IATK
         /// <param name="material">Material.</param>
         public View apply(GameObject parent, Material material)
         {
+
+            Debug.Log("View apply parent is " + parent);
             parent.name = Name;
             
             GameObject viewGameObject = new GameObject();

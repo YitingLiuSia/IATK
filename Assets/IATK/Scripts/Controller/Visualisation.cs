@@ -8,14 +8,14 @@ using System;
 
 namespace IATK
 {
-   
+
     /// <summary>
     /// Visualisation class to act as a view controller - reads the model to create the view
     /// </summary>
     [ExecuteAlways]
     public class Visualisation : MonoBehaviour
     {
-       
+
         //// DATA
         [Tooltip("The source for the data")]
         public DataSource dataSource;
@@ -106,7 +106,7 @@ namespace IATK
 
         [Tooltip("The color palette for discrete variables mapping")]
         public Color[] coloursPalette;
-        
+
         public float width = 1.0f;
         public float height = 1.0f;
         public float depth = 1.0f;
@@ -132,6 +132,7 @@ namespace IATK
         // PUBLIC
         public void CreateVisualisation(AbstractVisualisation.VisualisationTypes visualizationType)
         {
+            Debug.Log("CreateVisualisation");
             //destroy the previous visualisations
             AbstractVisualisation[] previousVisualizations = GetComponentsInChildren<AbstractVisualisation>();
 
@@ -150,8 +151,8 @@ namespace IATK
             }
 
             //destroy previous key
-            if(key!=null)
-            DestroyImmediate(key.gameObject);
+            if (key != null)
+                DestroyImmediate(key.gameObject);
 
             visualisationType = visualizationType;
 
@@ -164,7 +165,7 @@ namespace IATK
                     theVisualizationObject.CreateVisualisation();
                     break;
                 case AbstractVisualisation.VisualisationTypes.SCATTERPLOT_MATRIX:
-        
+
                     int dimensionCount = dataSource.DimensionCount;
                     if (dimensionCount > MAX_INIT_SCATTERPLOTMATRIX) dimensionCount = MAX_INIT_SCATTERPLOTMATRIX;
 
@@ -190,7 +191,7 @@ namespace IATK
                         parallelCoordinatesDimensions[i] = new DimensionFilter { Attribute = dataSource[i].Identifier };
                     }
                     theVisualizationObject = gameObject.AddComponent<ParallelCoordinatesVisualisation>();// new ParrallelCoordinates();
-                    
+
                     theVisualizationObject.visualisationReference = this;
                     theVisualizationObject.UpdateVisualisation(AbstractVisualisation.PropertyType.DimensionChange);
 
@@ -217,7 +218,7 @@ namespace IATK
         {
             theVisualizationObject.CreateVisualisation();// UpdateVisualisation(propertyType);
         }
-        
+
         /// <summary>
         /// Gets the axies.
         /// </summary>
@@ -233,14 +234,15 @@ namespace IATK
 
             return retVal;
         }
-        
+
         public virtual void updateViewProperties(AbstractVisualisation.PropertyType propertyType)
         {
+            Debug.Log("update view properties "+ propertyType);
             if (theVisualizationObject == null) CreateVisualisation(visualisationType);
             theVisualizationObject.UpdateVisualisation(propertyType);
 
-            if(OnUpdateViewAction!=null)
-            OnUpdateViewAction(propertyType);
+            if (OnUpdateViewAction != null)
+                OnUpdateViewAction(propertyType);
 
             if (key != null)
             {
@@ -321,6 +323,7 @@ namespace IATK
 
         void RuntimeEditorLoadAndSaveConfiguration()
         {
+            Debug.Log("RuntimeEditorLoadAndSaveConfiguration in Visualization script");
             // get the pre existing views in the hierarchy
             View[] views = GetComponentsInChildren<View>();
 
@@ -333,7 +336,7 @@ namespace IATK
                 view.BigMesh = view.GetComponentInChildren<BigMesh>();
                 theVisualizationObject.viewList.Add(view);
             }
-            
+
             // bind the axes objects by the name of the property in the children hierarchy
             foreach (Transform child in transform)
             {
@@ -401,15 +404,15 @@ namespace IATK
 
                         updateViewProperties(AbstractVisualisation.PropertyType.Size);
                         updateViewProperties(AbstractVisualisation.PropertyType.Colour);
-                        
+
                         width = theVisualizationObject.creationConfiguration.VisualisationWidth;
                         height = theVisualizationObject.creationConfiguration.VisualisationHeight;
                         depth = theVisualizationObject.creationConfiguration.VisualisationDepth;
-                        
+
                         updateViewProperties(AbstractVisualisation.PropertyType.Scaling);
 
                         break;
-                        
+
                     case AbstractVisualisation.VisualisationTypes.SCATTERPLOT_MATRIX:
 
                         linkingDimension = string.IsNullOrEmpty(theVisualizationObject.creationConfiguration.LinkingDimension) ? "Undefined" : theVisualizationObject.creationConfiguration.LinkingDimension;
@@ -437,11 +440,11 @@ namespace IATK
                         width = theVisualizationObject.creationConfiguration.VisualisationWidth;
                         height = theVisualizationObject.creationConfiguration.VisualisationHeight;
                         depth = theVisualizationObject.creationConfiguration.VisualisationDepth;
-                        
+
                         updateViewProperties(AbstractVisualisation.PropertyType.Scaling);
-                        
+
                         break;
-                        
+
                     case AbstractVisualisation.VisualisationTypes.PARALLEL_COORDINATES:
                         parallelCoordinatesDimensions = theVisualizationObject.creationConfiguration.parallelCoordinatesDimensions;
                         updateViewProperties(AbstractVisualisation.PropertyType.DimensionChange);
@@ -466,14 +469,14 @@ namespace IATK
                         width = theVisualizationObject.creationConfiguration.VisualisationWidth;
                         height = theVisualizationObject.creationConfiguration.VisualisationHeight;
                         depth = theVisualizationObject.creationConfiguration.VisualisationDepth;
-                        
+
                         updateViewProperties(AbstractVisualisation.PropertyType.Scaling);
-                        
+
                         break;
-                        
+
                     case AbstractVisualisation.VisualisationTypes.GRAPH_LAYOUT:
                         break;
-                        
+
                     default:
                         break;
                 }
@@ -509,7 +512,7 @@ namespace IATK
             }
             name = backupname;
 
-            if(key!=null) DestroyImmediate(key);
+            if (key != null) DestroyImmediate(key);
 
         }
 
@@ -525,9 +528,9 @@ namespace IATK
 
         }
 
-        
 
-        
+
+
     }
 
 }   // Namespace

@@ -366,6 +366,7 @@ namespace IATK
         /// <param name="meshData">Mesh data.</param>
         public static BigMesh createBigMesh(BigMeshData meshData)
         {
+            Debug.Log("create big mesh");
             List<Mesh> localMeshList = new List<Mesh>();
             GameObject parentObject = null;
             
