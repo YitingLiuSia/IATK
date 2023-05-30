@@ -141,13 +141,16 @@ namespace IATK
                             viewList[0].UpdateXPositions(visualisationReference.dataSource[visualisationReference.xDimension.Attribute].Data);
                             viewList[0].TweenPosition();
                         }
-                        if (creationConfiguration.Axies.ContainsKey(CreationConfiguration.Axis.X))
+                        if(creationConfiguration != null)
                         {
-                            creationConfiguration.Axies[CreationConfiguration.Axis.X] = visualisationReference.xDimension.Attribute;
-                        }
-                        else
-                        {
-                            creationConfiguration.Axies.Add(CreationConfiguration.Axis.X, visualisationReference.xDimension.Attribute);
+                            if (creationConfiguration.Axies.ContainsKey(CreationConfiguration.Axis.X))
+                            {
+                                creationConfiguration.Axies[CreationConfiguration.Axis.X] = visualisationReference.xDimension.Attribute;
+                            }
+                            else
+                            {
+                                creationConfiguration.Axies.Add(CreationConfiguration.Axis.X, visualisationReference.xDimension.Attribute);
+                            }
                         }
                         break;
                     case AbstractVisualisation.PropertyType.Y:
@@ -161,13 +164,16 @@ namespace IATK
                             viewList[0].UpdateYPositions(visualisationReference.dataSource[visualisationReference.yDimension.Attribute].Data);
                             viewList[0].TweenPosition();
                         }
-                        if (creationConfiguration.Axies.ContainsKey(CreationConfiguration.Axis.Y))
+                        if(creationConfiguration != null)
                         {
-                            creationConfiguration.Axies[CreationConfiguration.Axis.Y] = visualisationReference.yDimension.Attribute;
-                        }
-                        else
-                        {
-                            creationConfiguration.Axies.Add(CreationConfiguration.Axis.Y, visualisationReference.yDimension.Attribute);
+                            if (creationConfiguration.Axies.ContainsKey(CreationConfiguration.Axis.Y))
+                            {
+                                creationConfiguration.Axies[CreationConfiguration.Axis.Y] = visualisationReference.yDimension.Attribute;
+                            }
+                            else
+                            {
+                                creationConfiguration.Axies.Add(CreationConfiguration.Axis.Y, visualisationReference.yDimension.Attribute);
+                            }
                         }
                         break;
                     case AbstractVisualisation.PropertyType.Z:
@@ -181,13 +187,16 @@ namespace IATK
                             viewList[0].UpdateZPositions(visualisationReference.dataSource[visualisationReference.zDimension.Attribute].Data);
                             viewList[0].TweenPosition();
                         }
-                        if (creationConfiguration.Axies.ContainsKey(CreationConfiguration.Axis.Z))
+                        if(creationConfiguration != null)
                         {
-                            creationConfiguration.Axies[CreationConfiguration.Axis.Z] = visualisationReference.zDimension.Attribute;
-                        }
-                        else
-                        {
-                            creationConfiguration.Axies.Add(CreationConfiguration.Axis.Z, visualisationReference.zDimension.Attribute);
+                            if (creationConfiguration.Axies.ContainsKey(CreationConfiguration.Axis.Z))
+                            {
+                                creationConfiguration.Axies[CreationConfiguration.Axis.Z] = visualisationReference.zDimension.Attribute;
+                            }
+                            else
+                            {
+                                creationConfiguration.Axies.Add(CreationConfiguration.Axis.Z, visualisationReference.zDimension.Attribute);
+                            }
                         }
                         break;
                     case AbstractVisualisation.PropertyType.Colour:
@@ -217,9 +226,12 @@ namespace IATK
 
                         }
 
-                        creationConfiguration.ColourDimension = visualisationReference.colourDimension;
-                        creationConfiguration.colourKeys = visualisationReference.dimensionColour;
-                        creationConfiguration.colour = visualisationReference.colour;
+                        if(creationConfiguration != null)
+                        {
+                            creationConfiguration.ColourDimension = visualisationReference.colourDimension;
+                            creationConfiguration.colourKeys = visualisationReference.dimensionColour;
+                            creationConfiguration.colour = visualisationReference.colour;
+                        }
 
                         break;
                     case AbstractVisualisation.PropertyType.Size:
@@ -235,7 +247,10 @@ namespace IATK
                                     viewList[i].SetSizeChannel(new float[visualisationReference.dataSource.DataCount]);
                                 }
                             }
-                            creationConfiguration.SizeDimension = visualisationReference.sizeDimension;       
+                            if(creationConfiguration != null)
+                            {
+                                creationConfiguration.SizeDimension = visualisationReference.sizeDimension;       
+                            }
                             viewList[0].TweenSize();
 
                             break;
@@ -248,20 +263,29 @@ namespace IATK
                             viewList[i].SetMinSize(visualisationReference.minSize);        // Data is normalised
                             viewList[i].SetMaxSize(visualisationReference.maxSize);
                         }
-                        creationConfiguration.Size = visualisationReference.size;
-                        creationConfiguration.MinSize = visualisationReference.minSize;
-                        creationConfiguration.MaxSize = visualisationReference.maxSize;
+                        if(creationConfiguration != null)
+                        {
+                            creationConfiguration.Size = visualisationReference.size;
+                            creationConfiguration.MinSize = visualisationReference.minSize;
+                            creationConfiguration.MaxSize = visualisationReference.maxSize;
+                        }
 
                         break;
                     case AbstractVisualisation.PropertyType.LinkingDimension:
-                        creationConfiguration.LinkingDimension = visualisationReference.linkingDimension;
+                        if(creationConfiguration != null)
+                        {
+                            creationConfiguration.LinkingDimension = visualisationReference.linkingDimension;
+                        }
                         
                         CreateVisualisation(); // needs to recreate the visualsiation because the mesh properties have changed
                         rescaleViews();
                         break;
 
                     case AbstractVisualisation.PropertyType.GeometryType:
-                        creationConfiguration.Geometry = visualisationReference.geometry;
+                        if(creationConfiguration != null)
+                        {
+                            creationConfiguration.Geometry = visualisationReference.geometry;
+                        }
                         CreateVisualisation(); // needs to recreate the visualsiation because the mesh properties have changed 
                         rescaleViews();
                         break;
@@ -278,10 +302,13 @@ namespace IATK
                             viewList[i].SetMaxNormZ(visualisationReference.zDimension.maxScale);
                         }
                         
-                        // TODO: Move visualsiation size from Scaling to its own PropertyType
-                        creationConfiguration.VisualisationWidth = visualisationReference.width;
-                        creationConfiguration.VisualisationHeight = visualisationReference.height;
-                        creationConfiguration.VisualisationDepth = visualisationReference.depth;
+                        if(creationConfiguration != null)
+                        {
+                            // TODO: Move visualsiation size from Scaling to its own PropertyType
+                            creationConfiguration.VisualisationWidth = visualisationReference.width;
+                            creationConfiguration.VisualisationHeight = visualisationReference.height;
+                            creationConfiguration.VisualisationDepth = visualisationReference.depth;
+                        }
                         break;
 
                     case AbstractVisualisation.PropertyType.DimensionFiltering:
@@ -348,7 +375,11 @@ namespace IATK
                 }
             
             if (visualisationReference.geometry != GeometryType.Undefined)// || visualisationType == VisualisationTypes.PARALLEL_COORDINATES)
-            SerializeViewConfiguration(creationConfiguration);
+            
+            if(creationConfiguration != null)
+            {
+                SerializeViewConfiguration(creationConfiguration);
+            }
 
             //Update any label on the corresponding axes
             UpdateVisualisationAxes(propertyType);
