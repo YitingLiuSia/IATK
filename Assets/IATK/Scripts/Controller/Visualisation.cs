@@ -12,7 +12,7 @@ namespace IATK
     /// <summary>
     /// Visualisation class to act as a view controller - reads the model to create the view
     /// </summary>
-    [ExecuteAlways]
+    [ExecuteInEditMode]
     public class Visualisation : MonoBehaviour
     {
        
@@ -485,7 +485,7 @@ namespace IATK
 
         private string ConfigurationFileName()
         {
-            string PathName = Application.streamingAssetsPath + Path.DirectorySeparatorChar + theVisualizationObject.serializedObjectPath;
+            string PathName = Application.persistentDataPath + Path.DirectorySeparatorChar + theVisualizationObject.serializedObjectPath;
             return PathName + Path.DirectorySeparatorChar + uid + ".json";
         }
 

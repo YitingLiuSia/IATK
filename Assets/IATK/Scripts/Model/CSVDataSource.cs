@@ -10,7 +10,7 @@ namespace IATK
     /// <summary>
     /// CSV file data source class 
     /// </summary>
-    [ExecuteAlways]
+    [ExecuteInEditMode]
     public class CSVDataSource : DataSource
     {
         // DATA

@@ -8,7 +8,7 @@ using System;
 
 namespace IATK
 {
-    [ExecuteAlways]
+    [ExecuteInEditMode]
     public class Axis : MonoBehaviour
     {
         #region Public/Inspector variables

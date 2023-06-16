@@ -8,7 +8,7 @@ using UnityEditor.Callbacks;
 
 namespace IATK
 {
-    [ExecuteAlways]
+    [ExecuteInEditMode]
     public class DataSourceManager : MonoBehaviour 
     {
         // DATA
