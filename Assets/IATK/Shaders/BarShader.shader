@@ -84,7 +84,7 @@ Shader "IATK/BarShader"
 					float4 color : COLOR;
 					float2 tex0	: TEXCOORD0;
 					float  isBrushed : FLOAT;
-					float size : FLOAT;
+					float size : FLOAT1;
 					
                     UNITY_VERTEX_OUTPUT_STEREO
 				};
